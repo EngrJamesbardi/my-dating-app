@@ -1,3 +1,48 @@
+# Modern Dating Web Application Monorepo
+
+## Overview
+A full-stack, cloud-ready dating app with Next.js frontend, Express backend, PostgreSQL, MongoDB, Socket.io, JWT, Google OAuth, and cloud media storage.
+
+## Structure
+- `src/` (Next.js frontend)
+- `backend/` (Express backend)
+- `shared/` (shared types/interfaces)
+- `infrastructure/` (infra-as-code, cloud setup)
+- `scripts/` (automation, migration, etc.)
+- `.github/` (Copilot instructions, workflows)
+- `.vscode/` (VS Code tasks/config)
+
+## Features
+- Secure authentication (email, Google OAuth)
+- Profile creation, photo uploads, bio, interests, preferences
+- Swipe/match interface with animations
+- Location-based matching, smart recommendations
+- Real-time chat, media sharing, notifications
+- Admin dashboard, analytics, moderation
+- Cloud media storage, geolocation, system health
+
+## Getting Started
+1. Install dependencies: `npm install`
+2. Start frontend: `npm run dev`
+3. Start backend: `cd backend && npm run dev`
+4. Run tests: `npm test`
+5. Configure environment variables in `.env`
+
+## Deployment
+- See `.github/workflows/ci-cd.yml` for CI/CD setup
+- Customize deploy step for AWS/GCP
+
+## Documentation
+- API endpoints: see backend `src/` files
+- Shared types: see `shared/types.ts`
+- Infrastructure: see `infrastructure/`
+
+## License & Privacy
+- Add privacy policy and terms before launch
+
+---
+For more details, see code comments and scripts in each folder.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
