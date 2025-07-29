@@ -1,3 +1,4 @@
+// Analytics interface for admin dashboard
 interface Analytics {
   users?: number;
   matches?: number;
@@ -25,7 +26,8 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [reports, setReports] = useState<Report[]>([]);
   const [analytics, setAnalytics] = useState<Analytics>({});
-  const [error, setError] = useState('');
+  // Remove unused setError to fix lint error
+  const [error] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');

@@ -53,6 +53,7 @@ export default function ProfilePage() {
       <div className="mb-2"><strong>Interests:</strong> {profile.interests ? profile.interests.join(', ') : ''}</div>
       <div className="mb-2"><strong>Verified:</strong> {profile.verified ? 'Yes' : 'No'}</div>
       <div className="mb-2"><strong>Location:</strong> {profile.location?.city ?? ''}, {profile.location?.country ?? ''}</div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <div className="mb-2"><strong>Photos:</strong> {profile.photos && profile.photos.map((url, i) => (
         <img key={i} src={url} alt="Profile" className="inline-block h-16 w-16 rounded mr-2" />
       ))}</div>

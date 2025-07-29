@@ -1,10 +1,11 @@
-interface UserProfile {
+// UserProfile interface for edit profile page
+type UserProfile = {
   name?: string;
   age?: number;
   gender?: string;
   bio?: string;
   interests?: string;
-}
+};
 "use client";
 import { useEffect, useState } from 'react';
 import axios from 'axios';

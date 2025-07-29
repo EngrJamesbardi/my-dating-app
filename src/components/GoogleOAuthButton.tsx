@@ -27,14 +27,14 @@ export default function GoogleOAuthButton() {
   };
 
   useEffect(() => {
-    // @ts-expect-error
+    // @ts-expect-error Google types missing from window object
     if (window.google) {
-      // @ts-expect-error
+      // @ts-expect-error Google types missing from window object
       window.google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
         callback: handleGoogle
       });
-      // @ts-expect-error
+      // @ts-expect-error Google types missing from window object
       window.google.accounts.id.renderButton(
         document.getElementById('google-signin'),
         { theme: 'outline', size: 'large' }
