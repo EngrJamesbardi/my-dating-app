@@ -12,7 +12,14 @@ interface Message {
   read: boolean;
 }
 
-export default function ChatPage({ matchId }: { matchId: string }) {
+import { FC } from 'react';
+
+interface ChatPageProps {
+  params: { matchId: string };
+}
+
+const ChatPage: FC<ChatPageProps> = ({ params }) => {
+  const matchId = params.matchId;
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
