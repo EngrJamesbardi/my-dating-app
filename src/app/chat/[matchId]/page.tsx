@@ -1,5 +1,4 @@
 
-import React from 'react';
 
 interface PageProps {
   params: {
@@ -7,7 +6,7 @@ interface PageProps {
   };
 }
 
-const ChatPage = ({ params }: PageProps) => {
+export default function ChatPage({ params }: PageProps) {
   const { matchId } = params;
 
   return (
@@ -16,6 +15,4 @@ const ChatPage = ({ params }: PageProps) => {
       <p>Match ID: {matchId}</p>
     </div>
   );
-};
-
-export default ChatPage;
+}
