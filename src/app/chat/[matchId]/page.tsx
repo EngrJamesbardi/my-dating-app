@@ -17,7 +17,7 @@ export default function ChatPage({ matchId }: { matchId: string }) {
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const socketRef = useRef<any>(null);
+  const socketRef = useRef<ReturnType<typeof io> | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -37,7 +37,9 @@ export default function ChatPage({ matchId }: { matchId: string }) {
     socketRef.current.on('typing', () => setIsTyping(true));
     socketRef.current.on('stopTyping', () => setIsTyping(false));
     return () => {
-      socketRef.current.disconnect();
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
     };
   }, [matchId]);
 
@@ -47,21 +49,29 @@ export default function ChatPage({ matchId }: { matchId: string }) {
     const res = await axios.post(`/api/chat/${matchId}`, { content: input }, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    socketRef.current.emit('message', res.data);
+    if (socketRef.current) {
+      socketRef.current.emit('message', res.data);
+    }
     setInput('');
     setTyping(false);
-    socketRef.current.emit('stopTyping', matchId);
+    if (socketRef.current) {
+      socketRef.current.emit('stopTyping', matchId);
+    }
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
     if (!typing) {
       setTyping(true);
-      socketRef.current.emit('typing', matchId);
+      if (socketRef.current) {
+        socketRef.current.emit('typing', matchId);
+      }
     }
     if (e.target.value === '') {
       setTyping(false);
-      socketRef.current.emit('stopTyping', matchId);
+      if (socketRef.current) {
+        socketRef.current.emit('stopTyping', matchId);
+      }
     }
   };
 

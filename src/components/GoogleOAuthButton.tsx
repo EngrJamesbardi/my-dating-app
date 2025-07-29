@@ -12,7 +12,7 @@ export default function GoogleOAuthButton() {
     };
   }, []);
 
-  const handleGoogle = (response: any) => {
+  const handleGoogle = (response: { credential: string }) => {
     // Send Google token to backend
     fetch('/api/auth/google', {
       method: 'POST',
@@ -27,14 +27,14 @@ export default function GoogleOAuthButton() {
   };
 
   useEffect(() => {
-    // @ts-ignore
+    // @ts-expect-error
     if (window.google) {
-      // @ts-ignore
+      // @ts-expect-error
       window.google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
         callback: handleGoogle
       });
-      // @ts-ignore
+      // @ts-expect-error
       window.google.accounts.id.renderButton(
         document.getElementById('google-signin'),
         { theme: 'outline', size: 'large' }

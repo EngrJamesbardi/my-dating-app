@@ -18,8 +18,12 @@ export default function RegisterPage() {
       const res = await axios.post('/api/auth/register', { email, password, name, age, gender });
       localStorage.setItem('token', res.data.token);
       window.location.href = '/profile';
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Registration failed');
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || 'Registration failed');
+      } else {
+        setError('Registration failed');
+      }
     }
   };
 

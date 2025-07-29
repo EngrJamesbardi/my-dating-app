@@ -1,9 +1,21 @@
+interface UserProfile {
+  name: string;
+  email: string;
+  age: number;
+  gender: string;
+  bio?: string;
+  interests?: string[];
+  verified?: boolean;
+  location?: { city?: string; country?: string };
+  photos?: string[];
+  privacy?: Record<string, unknown>;
+}
 "use client";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -37,14 +49,14 @@ export default function ProfilePage() {
       <div className="mb-2"><strong>Email:</strong> {profile.email}</div>
       <div className="mb-2"><strong>Age:</strong> {profile.age}</div>
       <div className="mb-2"><strong>Gender:</strong> {profile.gender}</div>
-      <div className="mb-2"><strong>Bio:</strong> {profile.bio}</div>
-      <div className="mb-2"><strong>Interests:</strong> {profile.interests?.join(', ')}</div>
+      <div className="mb-2"><strong>Bio:</strong> {profile.bio ?? ''}</div>
+      <div className="mb-2"><strong>Interests:</strong> {profile.interests ? profile.interests.join(', ') : ''}</div>
       <div className="mb-2"><strong>Verified:</strong> {profile.verified ? 'Yes' : 'No'}</div>
-      <div className="mb-2"><strong>Location:</strong> {profile.location?.city}, {profile.location?.country}</div>
-      <div className="mb-2"><strong>Photos:</strong> {profile.photos?.map((url: string, i: number) => (
+      <div className="mb-2"><strong>Location:</strong> {profile.location?.city ?? ''}, {profile.location?.country ?? ''}</div>
+      <div className="mb-2"><strong>Photos:</strong> {profile.photos && profile.photos.map((url, i) => (
         <img key={i} src={url} alt="Profile" className="inline-block h-16 w-16 rounded mr-2" />
       ))}</div>
-      <div className="mb-2"><strong>Privacy:</strong> {JSON.stringify(profile.privacy)}</div>
+      <div className="mb-2"><strong>Privacy:</strong> {profile.privacy ? JSON.stringify(profile.privacy) : ''}</div>
       <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Edit Profile</button>
     </div>
   );

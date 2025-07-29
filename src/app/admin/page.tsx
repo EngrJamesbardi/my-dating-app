@@ -1,3 +1,7 @@
+interface Analytics {
+  users?: number;
+  matches?: number;
+}
 "use client";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -20,7 +24,7 @@ interface Report {
 export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [reports, setReports] = useState<Report[]>([]);
-  const [analytics, setAnalytics] = useState<any>({});
+  const [analytics, setAnalytics] = useState<Analytics>({});
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -52,8 +56,8 @@ export default function AdminDashboard() {
       <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">Analytics</h3>
-        <div>Users: {analytics.users}</div>
-        <div>Matches: {analytics.matches}</div>
+        <div>Users: {analytics.users ?? 0}</div>
+        <div>Matches: {analytics.matches ?? 0}</div>
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">User Management</h3>
